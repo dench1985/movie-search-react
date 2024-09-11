@@ -1,0 +1,141 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #15141F;
+
+}
+
+.search_wrapper {
+    padding-inline: 24px;
+    padding-block: 24px;
+
+    form {
+        background: #211F30;
+        height: 48px;
+
+        border-radius: 20px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+
+        gap: 20px;
+
+        flex-direction: row-reverse;
+
+        button,
+        input {
+            background: transparent;
+            border: none;
+
+            display: grid;
+        }
+
+        input {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+
+            letter-spacing: 0.01em;
+            color: #BBBBBB;
+            outline: none;
+            width: 100%;
+
+            ::placeholder {
+                opacity: 0.5;
+            }
+
+        }
+
+    }
+
+
+}
+
+.movie-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 16px;
+    row-gap: 20px;
+
+    .list-item {
+        display: grid;
+        gap: 12px;
+
+        img {
+
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
+            border-radius: 20px;
+
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        div {
+            font-family: "Comfortaa", sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            letter-spacing: 0.02em;
+
+            color: #FFFFFF;
+
+
+
+        }
+    }
+}
+
+.movie-opisanie {
+
+    img {
+        width: 100%;
+        height: 287px;
+
+        object-fit: cover;
+
+    }
+
+    .content {
+        padding: 24px;
+
+        h1 {
+
+
+            font-family: "Comfortaa", sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 29px;            
+            letter-spacing: 0.02em;
+
+            color: #FFFFFF;
+
+        }
+
+        p {
+
+
+            font-family: "Comfortaa", sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 18px;           
+            letter-spacing: 0.02em;
+
+            color: #BCBCBC;
+
+
+        }
+
+
+    }
+}
