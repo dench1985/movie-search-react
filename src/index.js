@@ -10,7 +10,19 @@ const GITHUB_NAME = "/movie-search-react/"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-<HashRouter>
+<Test/>
+  
+);
+
+function Test(params) {
+
+const x = "#tgWebAppData"
+ if( window.location.href.includes(x)) {
+  window.location.href= window.location.href.split(x)[0];
+ }
+
+  return(
+      <HashRouter>
   
     <Routes path = {GITHUB_NAME}>
       <Route path="/" element={<App/>} />
@@ -18,17 +30,7 @@ root.render(
     </Routes>
   
 </HashRouter>
-  
-);
-
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(
-
-//   <BrowserRouter >
-//     <Routes path = {GITHUB_NAME}>
-//       <Route path="/" element={<App/>} />
-//       <Route  path="/:id" element={<MoviesDetails/>} />
-//     </Routes>
-//   </BrowserRouter>
-// );
+  )
+ 
+}
 
