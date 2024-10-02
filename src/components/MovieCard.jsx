@@ -18,3 +18,6 @@ export default function MovieCard({film}){
     </div>
     )
 }
+
+
+

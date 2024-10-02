@@ -15,10 +15,13 @@ export default function Favorites() {
         return null
     }
     
-    return <div>
-        {take.map((value) => <MovieCard film={turn[value]} />)
+    return <div className="favorite-film">
+       <h3 >Любимые фильмы</h3>
+        <div className="movie-list">
+            {take.map((value) => <MovieCard film={turn[value]} />)
 }
-        <h3 >Любимые фильмы</h3>
+        </div>
+         
         </div>
 
 

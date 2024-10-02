@@ -13,6 +13,7 @@ export default function MovieList({ films }) {
         <div>
 
             <div className="movie-list">
+                
                 {films.map(film => (
                     <MovieCard key={film.filmId} film={film} />
                 ))}

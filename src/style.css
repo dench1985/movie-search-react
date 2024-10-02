@@ -13,6 +13,9 @@ body {
     padding-inline: 24px;
     padding-block: 24px;
 
+    max-width: 550px;
+    margin: auto;
+
     form {
         background: #211F30;
         height: 48px;
@@ -67,6 +70,7 @@ body {
     .list-item {
         display: grid;
         gap: 12px;
+        grid-template-rows: 1fr 50px;
 
         img {
 
@@ -95,14 +99,52 @@ body {
 }
 
 .movie-opisanie {
-
-    img {
-        width: 100%;
+    max-width: 550px;
+    margin: auto;
+    .kartinka {
+        position: relative;
         height: 287px;
 
-        object-fit: cover;
 
+        .play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+        }
+
+        .nazad {
+            position: absolute;
+            top: 52px;
+            left: 37px;
+
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .black {
+            position: absolute;
+            inset: 0;
+
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 28.65%, rgba(0, 0, 0, 0) 64.06%, rgba(0, 0, 0, 0.8) 100%);
+
+        }
+
+        img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+
+
+
+            object-fit: cover;
+
+        }
     }
+
 
     .content {
         padding: 24px;
@@ -114,10 +156,12 @@ body {
             font-style: normal;
             font-weight: 500;
             font-size: 24px;
-            line-height: 29px;            
+            line-height: 29px;
             letter-spacing: 0.02em;
 
             color: #FFFFFF;
+
+            margin-bottom: 14px;
 
         }
 
@@ -128,7 +172,7 @@ body {
             font-style: normal;
             font-weight: 400;
             font-size: 12px;
-            line-height: 18px;           
+            line-height: 18px;
             letter-spacing: 0.02em;
 
             color: #BCBCBC;
@@ -136,6 +180,144 @@ body {
 
         }
 
+        .time-wraper,
+        .reliz-wraper {
+            padding-bottom: 21px;
+            margin-bottom: 16px;
+
+            border-bottom: 0.2px solid #515151;
+            display: flex;
+
+
+
+        }
+
+        .time-wraper {
+            gap: 18px;
+
+            font-family: 'Comfortaa';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14px;
+            letter-spacing: 0.02em;
+            color: #BCBCBC;
+
+            .vrema,
+            .reting {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+        }
+        .reliz-wraper {
+            gap: 47px;
+
+            font-family: 'Comfortaa';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+            letter-spacing: 0.02em;
+
+            color: #FFFFFF;
+
+            text-wrap: nowrap;
+
+            .month-year {
+                margin-top: 12px;
+            }
+
+            .zhanr {
+
+                .zhanr-knopki {
+                    margin-top: 8px;
+                    display: flex;
+                    gap: 12px;
+                    flex-wrap: wrap;
+                    button {
+
+                        background: rgba(250, 240, 202, 0.05);
+
+                        backdrop-filter: blur(2.405px);
+
+                        border-radius: 15px;
+                        height: 25px;
+                        padding-inline: 12px;
+
+                        border: 0;
+
+                        font-family: 'Comfortaa';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 12px;
+                        line-height: 14px;
+                        letter-spacing: 0.02em;
+
+                        color: #BCBCBC;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        .opisanie-wraper {
+            margin-bottom: 25px;
+
+            .opisnie {
+                margin-bottom: 12px;
+
+                font-family: 'Comfortaa';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 19px;
+                letter-spacing: 0.02em;
+
+                color: #FFFFFF;
+            }
+        }
+        .izbranoe button {
+            background: rgba(250, 240, 202, 0.05);
+
+                        backdrop-filter: blur(2.405px);
+
+                        border-radius: 15px;
+                        height: 25px;
+                        padding-inline: 12px;
+
+                        border: 0;
+
+                        font-family: 'Comfortaa';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 12px;
+                        line-height: 14px;
+                        letter-spacing: 0.02em;
+
+                        color: #BCBCBC;
+        }
+
+    }
+}
+.favorite-film{
+    margin-top: 50px;
+    h3{
+ font-family: 'Comfortaa';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 29px;
+
+letter-spacing: 0.02em;
+
+color: #FFFFFF;
+
+margin-bottom: 18px;
 
     }
 }
