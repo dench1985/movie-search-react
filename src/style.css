@@ -321,3 +321,27 @@ margin-bottom: 18px;
 
     }
 }
+.poster-placeholder {
+    aspect-ratio: 2 / 3;
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    background: #211f30;
+    color: #bbbbbb;
+    text-align: center;
+}
+.detail-poster-placeholder {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    background: #211f30;
+    color: #bbbbbb;
+    font-family: "Comfortaa", sans-serif;
+font-size: 14px;
+text-align: center;
+}
+.play.hidden {
+    display: none;
+}

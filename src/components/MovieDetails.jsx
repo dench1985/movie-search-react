@@ -12,6 +12,7 @@ export default function MoviesDetails() {
     const [vSiske, setVSpiske] = useState(id in object_list)
 
     const [film, setFilm] = useState(null)
+    const [posterError, setPosterError] = useState(false);
 
 
     function handelDelete() {
@@ -45,9 +46,17 @@ export default function MoviesDetails() {
     return (
         <div className="movie-opisanie">
             <div className="kartinka">
-                <img src={film.posterUrl} alt="" />
+                {film.posterUrl && !posterError ? (
+    <img
+        src={film.posterUrl}
+        alt={film.nameRu || film.nameEn || "Постер фильма"}
+        onError={() => setPosterError(true)}
+    />
+) : (
+    <div className="detail-poster-placeholder">Постер недоступен</div>
+)}
                 <div className="black" ></div>
-                <div className="play">
+               <div className={`play ${!film.posterUrl || posterError ? "hidden" : ""}`}>
                     <svg
                         width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g filter="url(#filter0_b_90_112)">
@@ -108,7 +117,7 @@ export default function MoviesDetails() {
             </div>
 
             <div className="content">
-                <h1>{film.nameRu}</h1>
+              <h1>{film.nameRu || film.nameEn || "Название не указано"}</h1>
                 <div className="time-wraper">
                     <div className="vrema"> <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7 1C3.6875 1 1 3.6875 1 7C1 10.3125 3.6875 13 7 13C10.3125 13 13 10.3125 13 7C13 3.6875 10.3125 1 7 1Z" stroke="#BBBBBB" stroke-miterlimit="10" />
@@ -146,7 +155,7 @@ export default function MoviesDetails() {
                 </div>
                 <div className="opisanie-wraper">
                     <div className="opisnie">Описание</div>
-                    <p>{film.description}</p>
+                    <p>{film.description || "Описание пока не предоставлено."}</p>
                 </div>
 
                 <div className="izbranoe">

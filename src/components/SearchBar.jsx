@@ -7,24 +7,41 @@ import { useSearchParams } from "react-router-dom"
 export default function SearchBar(props) {
     const [sParams, setParams] = useSearchParams();
 
-    const [text, setText] = useState(sParams.get("s"))
+   const [text, setText] = useState(sParams.get("s") || "")
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
 
     function handleInput(e) {
 
         setText(e.target.value)
     }
-    async function hendelSubmit(e) {
-        e?.preventDefault()
-        const url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${text}&page=1`
+  async function hendelSubmit(e) {
+    e?.preventDefault();
+
+    const query = text.trim();
+    if (!query) return;
+
+    setLoading(true);
+    setError("");
+
+    try {
+        const url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${encodeURIComponent(query)}&page=1`;
         const result = await fetch(url, headers);
 
-        const data = await result.json()
-        setParams({ s: text })
+        if (!result.ok) {
+            throw new Error("Ошибка ответа сервера");
+        }
 
-        props.set(data.films)
-
-
+        const data = await result.json();
+        setParams({ s: query });
+        props.set(data.films ?? []);
+    } catch {
+        setError("Не удалось загрузить фильмы. Попробуйте ещё раз.");
+    } finally {
+        setLoading(false);
     }
+}
     useEffect(() => {
         if (text) {
             hendelSubmit()
@@ -32,7 +49,10 @@ export default function SearchBar(props) {
     }, [])
 
 
-    return <form onSubmit={hendelSubmit}>
+    return <div>
+
+   
+    <form onSubmit={hendelSubmit}>
         <input type="text" value={text} onInput={handleInput} required 
         placeholder="Sherlock Holmes"
         />
@@ -49,7 +69,11 @@ export default function SearchBar(props) {
                         fill="white"
                     />
                 </svg>
+                <button type="submit" disabled={loading}></button>
         </button>
-    </form>
+        </form>
+        {loading && <p>Загружаем фильмы...</p>}
+     {error && <p role="alert">{error}</p>}
+     </div>
 }
 
