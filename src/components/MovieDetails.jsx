@@ -5,43 +5,69 @@ import { headers } from "../tools";
 
 
 export default function MoviesDetails() {
-    let { id } = useParams();
-    const string_List = localStorage.getItem("a")
-    const object_list = JSON.parse(string_List ?? "{}")
-
-    const [vSiske, setVSpiske] = useState(id in object_list)
-
-    const [film, setFilm] = useState(null)
+    const { id } = useParams();
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [film, setFilm] = useState(null);
+    const [loadError, setLoadError] = useState("");
     const [posterError, setPosterError] = useState(false);
 
+    useEffect(() => {
+        const controller = new AbortController();
+        setFilm(null);
+        setLoadError("");
+        setPosterError(false);
 
-    function handelDelete() {
-        delete object_list[id]
-        localStorage.setItem('a', JSON.stringify(object_list))
-        setVSpiske(false)
-    }
+        async function loadFilm() {
+            try {
+                const url = `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`;
+                const response = await fetch(url, {
+                    ...headers,
+                    signal: controller.signal,
+                });
 
-    async function getFilm() {
-        const url = "https://kinopoiskapiunofficial.tech/api/v2.2/films/" + id;
-        const response = await fetch(url, headers)
-        const data = await response.json()
-        setFilm(data)
+                if (!response.ok) {
+                    throw new Error("Ошибка ответа сервера");
+                }
 
-    }
+                const data = await response.json();
+                setFilm(data);
+                setLoadError("");
+            } catch (error) {
+                if (error.name !== "AbortError") {
+                    setLoadError("Не удалось загрузить фильм. Попробуйте ещё раз.");
+                }
+            }
+        }
 
-    function myFunction() {
-        let tem = localStorage.getItem("a")
-        let rom = JSON.parse(tem) ?? {}
-        rom[id] = film
-        localStorage.setItem('a', JSON.stringify(rom))
-        setVSpiske(true)
-    }
+        void loadFilm();
+        return () => controller.abort();
+    }, [id]);
 
     useEffect(() => {
-        getFilm()
-    }, [])
+        const favorites = JSON.parse(localStorage.getItem("a") ?? "{}");
+        setIsFavorite(id in favorites);
+    }, [id]);
+
+    function removeFromFavorites() {
+        const favorites = JSON.parse(localStorage.getItem("a") ?? "{}");
+        delete favorites[id];
+        localStorage.setItem("a", JSON.stringify(favorites));
+        setIsFavorite(false);
+    }
+
+    function addToFavorites() {
+        const favorites = JSON.parse(localStorage.getItem("a") ?? "{}");
+        favorites[id] = film;
+        localStorage.setItem("a", JSON.stringify(favorites));
+        setIsFavorite(true);
+    }
+
+    if (loadError) {
+        return <p role="alert">{loadError}</p>;
+    }
+
     if (!film) {
-        return <div>Loding.....</div>
+        return <div>Загружаем фильм...</div>;
     }
     return (
         <div className="movie-opisanie">
@@ -145,8 +171,8 @@ export default function MoviesDetails() {
                     </div>
                     <div className="zhanr"> Genre
                         <div className="zhanr-knopki">
-                            {film.genres.map((g)=> 
-                              <button >{g.genre}</button>
+                            {(film.genres ?? []).map((genre) =>
+                              <button key={genre.genre} type="button">{genre.genre}</button>
                             
                             )}
                             
@@ -159,9 +185,9 @@ export default function MoviesDetails() {
                 </div>
 
                 <div className="izbranoe">
-                    {vSiske ?
-                        (<button onClick={handelDelete}>Удалить из избраного </button>) :
-                        (<button onClick={myFunction}>Добавить в избраное </button>)}
+                    {isFavorite ?
+                        (<button onClick={removeFromFavorites}>Удалить из избранного</button>) :
+                        (<button onClick={addToFavorites}>Добавить в избранное</button>)}
                 </div>
 
             </div>

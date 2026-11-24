@@ -1,36 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import MoviesDetails from './components/MovieDetails';
-import Favorites from './components/Favorites';
 import "./style.css"
 
-const GITHUB_NAME = "/movie-search-react/"
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-<Test/>
-  
-);
+root.render(<AppRouter />);
 
-function Test(params) {
+function AppRouter() {
+    const telegramDataMarker = "#tgWebAppData";
+    if (window.location.href.includes(telegramDataMarker)) {
+        window.location.href = window.location.href.split(telegramDataMarker)[0];
+    }
 
-const x = "#tgWebAppData"
- if( window.location.href.includes(x)) {
-  window.location.href= window.location.href.split(x)[0];
- }
-
-  return(
-      <HashRouter>
-  
-    <Routes path = {GITHUB_NAME}>
-      <Route path="/" element={<App/>} />
-      <Route  path="/:id" element={<MoviesDetails/>} />
-    </Routes>
-  
-</HashRouter>
-  )
- 
+    return (
+        <HashRouter>
+            <Routes>
+                <Route path="/" element={<App />} />
+                <Route path="/:id" element={<MoviesDetails />} />
+            </Routes>
+        </HashRouter>
+    );
 }
 
