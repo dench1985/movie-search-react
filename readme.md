@@ -25,4 +25,4 @@
 Установите зависимости:
 
 ```bash
-npm install
+npm install 
