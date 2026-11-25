@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { headers } from "../tools";
 
 
 
@@ -19,9 +18,8 @@ export default function MoviesDetails() {
 
         async function loadFilm() {
             try {
-                const url = `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`;
+                const url = `/api/film?id=${encodeURIComponent(id)}`;
                 const response = await fetch(url, {
-                    ...headers,
                     signal: controller.signal,
                 });
 

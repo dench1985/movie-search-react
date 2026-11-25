@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { headers } from "../tools";
 
 export default function SearchBar({ set: setFilms }) {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -17,8 +16,8 @@ export default function SearchBar({ set: setFilms }) {
         setError("");
 
         try {
-            const url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${encodeURIComponent(normalizedQuery)}&page=1`;
-            const response = await fetch(url, headers);
+            const url = `/api/search?keyword=${encodeURIComponent(normalizedQuery)}`;
+            const response = await fetch(url);
 
             if (!response.ok) {
                 throw new Error("Ошибка ответа сервера");
